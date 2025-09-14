@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pi Cloud - Dateiverwaltung</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Pi Cloud</h1>
+		<form id="uploadForm">
+			<label for="fileInput" class="upload-label">Datei auswählen</label>
+			<input type="file" id="fileInput" name="file" required>
+			<button type="submit" class="upload-btn">Hochladen</button>
+		</form>
+		<div id="message"></div>
+		<h2>Deine Dateien</h2>
+		<div id="fileList" class="file-list"></div>
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>
