@@ -33,7 +33,7 @@ public class CloudService {
 
      private static final Logger log = LoggerFactory.getLogger(CloudService.class);
 
-    @Value("${app.file-storage.path:C:/temp/pi_cloud/files}")
+    @Value("${app.file-storage.path:/mnt/ssd/cloud-storage}")
     private String storagePath;
     
     @Value("${app.compression.entropy-threshold:5.0}")
