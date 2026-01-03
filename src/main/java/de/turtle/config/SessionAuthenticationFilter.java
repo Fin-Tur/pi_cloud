@@ -59,13 +59,13 @@ public class SessionAuthenticationFilter implements Filter {
                path.endsWith("/login.js") ||
                path.startsWith("/h2-console/") ||
                path.equals("/") ||
+		path.endsWith("/style.css") ||
                path.equals("/favicon.ico");
     }
     
     private boolean isProtectedEndpoint(String path) {
         return path.startsWith("/api/") ||
                path.endsWith("/index.html") ||
-               path.endsWith("/script.js") ||
-               path.endsWith("/style.css");
+               path.endsWith("/script.js");
     }
 }
