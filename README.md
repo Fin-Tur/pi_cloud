@@ -59,21 +59,7 @@ The file processing is powered by native **C++ algorithms from the FileInSight p
 - Maven or Gradle  
 - (Optional) Node.js / Vite for frontend development  
 - Compiled `FileInSight.dll` (or `.so` on Linux)  
-- Raspberry Pi OS / Windows / Linux x64  
-
-### 🔹 Run
-
-```bash
-# 1. Build the project
-mvn clean package
-
-# 2. Start the server
-java -jar target/pi-cloud.jar
-
-# 3. Open in browser
-http://localhost:8080
-```
-
+- Raspberry Pi OS / Linux x64  
 ---
 
 ## Frontend Features
@@ -86,28 +72,13 @@ http://localhost:8080
 
 ---
 
-## Development Mode (Frontend Separation)
-
-For faster frontend development without restarting Spring Boot:
-
-```bash
-# 1. Run backend
-mvn spring-boot:run
-
-# 2. Run frontend separately (e.g., using Vite or Live Server)
-npm install
-npm run dev
-```
-
-> The frontend communicates with the backend via `/api/*` proxy routes.
-
----
-
 ## Deployment (Raspberry Pi)
 
-1. Copy `FileInSight.so` to `/usr/local/lib/`  
-2. Run `pi-cloud.jar`  
-3. Configure autostart using `systemd` or `crontab`  
+1. Copy `libFISext.so` to `/opt/pi-cloud/linux-aarch64/`
+2. Edit application.properties and copy to '/opt/pi-cloud' 
+3. Copy .jar to /opt/pi-cloud
+4. Run `pi-cloud.jar`  
+5. Configure autostart using `systemd`  
 
 ---
 
