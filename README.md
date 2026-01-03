@@ -75,8 +75,8 @@ The file processing is powered by native **C++ algorithms from the FileInSight p
 ## Deployment (Raspberry Pi)
 
 1. Copy `libFISext.so` to `/opt/pi-cloud/linux-aarch64/`
-2. Edit application.properties and copy to '/opt/pi-cloud' 
-3. Copy .jar to /opt/pi-cloud
+2. Edit application.properties and copy to `/opt/pi-cloud` 
+3. Copy .jar to `/opt/pi-cloud`
 4. Run `pi-cloud.jar`  
 5. Configure autostart using `systemd`  
 
