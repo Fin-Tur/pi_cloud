@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 @RequestMapping("/api/auth")
 public class AuthController {
     
@@ -31,6 +31,18 @@ public class AuthController {
     
     @Autowired
     private UserService userService;
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getCUrrentUser(HttpServletRequest request) {
+        String username = getCurrentUser(request);
+        User user = userService.findByUsername(username).orElse(null);
+        if (username != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new AuthDTOs.AuthResponse(false, "Not authenticated"));
+        }
+    }
     
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody AuthDTOs.RegisterRequest request) {

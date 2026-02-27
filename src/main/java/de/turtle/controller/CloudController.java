@@ -26,7 +26,7 @@ import de.turtle.services.CloudService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 @RequestMapping("/api/files")
 public class CloudController {
 
