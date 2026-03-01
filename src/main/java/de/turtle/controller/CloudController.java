@@ -31,6 +31,8 @@ import jakarta.servlet.http.HttpServletRequest;
 public class CloudController {
 
     private static final Logger logger = LoggerFactory.getLogger(CloudController.class);
+    private record PasswordRequest(String password) {}
+
 
     @Autowired
     private CloudService cloudService;
@@ -53,11 +55,11 @@ public class CloudController {
     }
 
     @PostMapping("/encryption/{id}")
-    public ResponseEntity<?> enDeCryptFile(@PathVariable Long id, @RequestBody String password, HttpServletRequest request){
+    public ResponseEntity<?> enDeCryptFile(@PathVariable Long id, @RequestBody PasswordRequest passwordRequest, HttpServletRequest request){
         if(!cloudService.canUserModifyFile(id, AuthController.getCurrentUserId(request))){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid DeleteRequest: User doesnt own file.");
         }
-        if(cloudService.enDeCryptFile(id, password)) {
+        if(cloudService.enDeCryptFile(id, passwordRequest.password())) {
             return ResponseEntity.ok("File encryption/decryption successful");
         }
         return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("File encryption/decryption not modified");
@@ -92,9 +94,9 @@ public class CloudController {
     }
 
     @PostMapping("/download/{id}")
-    public ResponseEntity<byte[]> downloadFile(@PathVariable Long id, @RequestBody String password) {
+    public ResponseEntity<byte[]> downloadFile(@PathVariable Long id, @RequestBody PasswordRequest passwordRequest) {
         FileEntity entity = cloudService.getFileById(id);
-        byte[] data = cloudService.downloadFile(id, password);
+        byte[] data = cloudService.downloadFile(id, passwordRequest.password());
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + entity.getName())
             .contentType(MediaType.APPLICATION_OCTET_STREAM)
