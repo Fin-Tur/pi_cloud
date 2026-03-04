@@ -43,6 +43,7 @@ public class CloudController {
         if(files.length == 1) {
             FileEntity savedFile = cloudService.storeFile(files[0], ownerId);
             if(savedFile == null) throw new IllegalArgumentException(); 
+            logger.info("ID:" + savedFile.getId()); //DEBUG ONLY
             return ResponseEntity.ok(List.of(savedFile));
         }else{
             List<FileEntity> savedFiles = cloudService.storeFiles(files, ownerId);
